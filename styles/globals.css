@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: Product;
+    src: url(../public/fonts/Product-Sans-Regular.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    font-family: Product !important;
+}

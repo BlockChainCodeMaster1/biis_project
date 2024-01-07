@@ -1,0 +1,38 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1440"
+        height="1234"
+        fill="none"
+      >
+        <g filter="url(#colour-bg_svg__a)">
+          <circle cx="409.5" cy="495.5" r="145.5" fill="#FBE86D"></circle>
+          <circle cx="1152.5" cy="613.5" r="145.5" fill="#67DFF6"></circle>
+          <circle cx="781" cy="715" r="169" fill="#E893F8"></circle>
+          <circle cx="898" cy="728" r="144" fill="#51B6F9"></circle>
+          <circle cx="1211.5" cy="679.5" r="145.5" fill="#67DFF6"></circle>
+          <circle cx="215.5" cy="679.5" r="145.5" fill="#FBE86D"></circle>
+          <circle cx="404.5" cy="677.5" r="145.5" fill="#ED777E"></circle>
+        </g>
+        <defs>
+          <filter
+            id="colour-bg_svg__a"
+            width="1987"
+            height="1234"
+            x="-280"
+            y="0"
+            color-interpolation-filters="sRGB"
+            filterUnits="userSpaceOnUse"
+          >
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feBlend
+              in="SourceGraphic"
+              in2="BackgroundImageFix"
+              result="shape"
+            ></feBlend>
+            <feGaussianBlur
+              result="effect1_foregroundBlur_1052_105"
+              stdDeviation="175"
+            ></feGaussianBlur>
+          </filter>
+        </defs>
+      </svg>

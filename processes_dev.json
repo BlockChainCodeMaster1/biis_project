@@ -5,14 +5,10 @@
       "name": "BIIS",
       "log_date_format": "YYYY-DD-MM HH:mm",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "development"
       },
-      "watch": [
-        "./server"
-      ],
-      "ignore_watch": [
-        "node_modules"
-      ]
+      "watch": ["./server"],
+      "ignore_watch": ["node_modules"]
     }
   ]
 }

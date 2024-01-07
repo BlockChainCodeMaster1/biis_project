@@ -283,7 +283,7 @@ export default function Home() {
           </div>
           <div className="flex flex-row gap-4  ">
             <Card className=" w-full border-[#EA970F] border">
-              <CardBody className="p-4 sm:p-10 sm:pt-36 pt-20 bg-white bg-[url(/home/uniSatWalletIcon.svg)] bg-no-repeat bg-[length:3rem_auto] sm:bg-[length:14rem_auto] bg-[position:8%_8%] sm:bg-[position:10%_10%]">
+              <CardBody className="p-4 sm:p-10 sm:pt-36 pt-20 bg-white bg-[url(/home/uniSatWalletIcon.svg)] bg-no-repeat bg-[length:3rem_auto] sm:bg-[length:5rem_auto] bg-[position:8%_8%] sm:bg-[position:10%_10%]">
                 <h1 className=" text-xl sm:text-4xl font-bold">UniSat Wallet</h1>
                 <p className="text-[#989EAF] text-base sm:text-lg py-2">
                   Buy $Biis for UniSat Wallet
@@ -292,7 +292,7 @@ export default function Home() {
               </CardBody>
             </Card>
             <Card className=" w-full border-[#000] border">
-              <CardBody className="p-4 sm:p-10  sm:pt-36 pt-20 bg-white  bg-[url(/home/okxWalletIcon.svg)] bg-no-repeat bg-[length:3rem_auto] sm:bg-[length:14rem_auto] bg-[position:8%_8%] sm:bg-[position:10%_10%]">
+              <CardBody className="p-4 sm:p-10  sm:pt-36 pt-20 bg-white  bg-[url(/home/okxWalletIcon.svg)] bg-no-repeat bg-[length:3rem_auto] sm:bg-[length:5rem_auto] bg-[position:8%_8%] sm:bg-[position:10%_10%]">
                 <h1 className=" text-2xl sm:text-4xl font-bold">OKX Wallet</h1>
                 <p className="text-[#989EAF] text-base sm:text-lg py-2">
                   Buy $Biis for OKX Wallet

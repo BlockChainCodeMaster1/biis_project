@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "script": "npm start -p 8166",
+      "script": "npm start",
       "name": "biis",
       "log_date_format": "YYYY-DD-MM HH:mm",
       "env": {

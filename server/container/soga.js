@@ -10,7 +10,7 @@ export async function getWhiteListAuth(req, res) {
   const { address } = req.params;
 
   const is_whitelist = WHITELIST.indexOf(address);
-  console.log("include_whitelist", include_whitelist);
+  console.log("is_whitelist", is_whitelist);
 
   const is_minted = await SOGA.count({
     where: {
@@ -43,7 +43,7 @@ export async function whiteListMint(req, res) {
 
   const mint_number = await SOGA.count();
 
-  if (mint_number >= 2) {
+  if (mint_number >= 1500) {
     res.send({
       msg: "Whitelist Mint is overflow",
       code: 0,

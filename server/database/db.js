@@ -1,6 +1,10 @@
 import { Sequelize } from '@sequelize/core';
 import configs from "./db.json";
 import SOGA from "../model/soga";
+import SOGAP from "../model/sogap";
+import BURN from "../model/burn";
+
+
 
 const dbHost = configs.mysql.host,
   dbPort = configs.mysql.port,
@@ -32,4 +36,7 @@ const db = {
 };
 
 db.SOGA = SOGA(db.sequelize, Sequelize.DataTypes);
+db.SOGAP = SOGAP(db.sequelize, Sequelize.DataTypes);
+db.BURN = BURN(db.sequelize, Sequelize.DataTypes);
+
 export default db;

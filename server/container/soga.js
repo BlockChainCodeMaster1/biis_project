@@ -1855,6 +1855,9 @@ const WHITELIST = [
   "J7yzdRcpQoJ3PHTmmUJ77aetnod5US8wjWdyJx2wXzph",
   "784dPmm5L1baU9DCFAdydo6vv4a2pyiFowssVV3bH76G",
   "ENa629V43BbHLE9mye2bLMe3esw5Lcgwj7gfy8Gre8xY",
+  "FeCuPP1QwT7M34BJBcUxGiffVz2Q1PovjfFmPtRRpGXj",
+  "3YqU8tCdp9YiQoxiE3okFG6DHa7naE7npyRhQWNv8BxM",
+
 
   "9ppiEsLybEazCHHaM1y2AcpEPgHX82aHPZD2E5LuL4ZQ"
 ];

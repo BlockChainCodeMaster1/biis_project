@@ -1846,6 +1846,14 @@ const WHITELIST = [
 "FUC77gA4CpjPmJxW1awxEmrJ6nnAGBYLQYrUnXhMvjuq",
 "5aFCai8aHLP4szia2jjmgHbBP38yv3TPZPeC1jBDA6Hj",
 "8MXwKuQdgJZkeWa2Ci8G2b2A4bbpPhNxjf4K71JUzciY",
+"APZC52iQbh7V3kVGnVtJ8pxoF5bS8dViVJKsbtJihqdP",
+"9R4jpXZjegGFTkGCLXHokqAhBRt6JhZL8S3ufXyptMk4",
+"6crSwW6EQoy3a28Ws5kKv8LkvoFn5qVWocM3yDxQbFJn",
+"FQGCh59rS4tVCUTn51cRHzJuqbVdBowp2nmLm8Mj9sBr",
+"J7yzdRcpQoJ3PHTmmUJ77aetnod5US8wjWdyJx2wXzph",
+"784dPmm5L1baU9DCFAdydo6vv4a2pyiFowssVV3bH76G",
+"ENa629V43BbHLE9mye2bLMe3esw5Lcgwj7gfy8Gre8xY",
+
 "9ppiEsLybEazCHHaM1y2AcpEPgHX82aHPZD2E5LuL4ZQ"
 ];
 

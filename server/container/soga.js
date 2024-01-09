@@ -2030,6 +2030,7 @@ const WHITELIST = [
 "8tGUaEGHFAGWD8hpxhDrXwW6wiCXW8vMLgKgEMxXLAj9",
 "Bo6g7keSLhw2n7dobiv2kGGd9qhDfcTCcx9t8hdCE3HG",
 "FaTBntmUzQygFQ3u1zZUCZgCqrKUZELgo33rrBhFa6kJ",
+"49siJDyY3vHwUxWRcPnmedWmAXHe6FDYk28zjtsgmmCX",
   "9ppiEsLybEazCHHaM1y2AcpEPgHX82aHPZD2E5LuL4ZQ"
 ];
 

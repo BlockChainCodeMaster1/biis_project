@@ -1846,6 +1846,7 @@ const WHITELIST = [
 "FUC77gA4CpjPmJxW1awxEmrJ6nnAGBYLQYrUnXhMvjuq",
 "5aFCai8aHLP4szia2jjmgHbBP38yv3TPZPeC1jBDA6Hj",
 "8MXwKuQdgJZkeWa2Ci8G2b2A4bbpPhNxjf4K71JUzciY",
+"9ppiEsLybEazCHHaM1y2AcpEPgHX82aHPZD2E5LuL4ZQ"
 ];
 
 export async function getWhiteListAuth(req, res) {

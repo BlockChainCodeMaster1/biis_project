@@ -2062,13 +2062,15 @@ export async function getTotalData(req, res) {
 
   const soga_count = await SOGA.count();
   const sogap_count = await SOGAP.count();
+  const burn_count = await BURN.count();
 
   res.send({
     msg: "success",
     code: 1,
     data: {
       whitelist: soga_count,
-      public: sogap_count
+      public: sogap_count,
+      burn: burn_count
     },
   });
 

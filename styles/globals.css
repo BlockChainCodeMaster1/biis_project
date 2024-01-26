@@ -13,3 +13,23 @@
 body{
     font-family: Product !important;
 }
+
+.cardBack {
+    @apply cursor-pointer;
+    background-position: center center;
+    background-size: cover;
+}
+
+.card {
+    @apply h-full w-full rounded-2xl shadow-xl transform absolute;
+    backface-visibility: hidden;
+}
+
+/*翻轉屬性*/
+.transform-style-3d {
+    transform-style: preserve-3d;
+}
+
+.transform-rotateY-180 {
+    transform: rotateY(180deg);
+}

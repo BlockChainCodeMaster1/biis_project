@@ -1,14 +1,14 @@
 "use client";
 import { createContext, useContext, useState  } from "react";
 
-type Acoount = {
+type Account = {
 	unisat: string;
 	okx: string;
 }
 
 
 type ContextType = {
-  account: Acoount;
+  account: Account;
   setAccount: React.Dispatch<any>;
 };
 

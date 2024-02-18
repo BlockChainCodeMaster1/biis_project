@@ -513,7 +513,7 @@ export const Back = ({
   ...props
 }: IconSvgProps) => (
 <svg width={size} height={size} viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M17.709 12.5L7.70898 12.5M7.70898 12.5L12.709 17.5M7.70898 12.5L12.709 7.49999" stroke="#3B3B3B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.709 12.5L7.70898 12.5M7.70898 12.5L12.709 17.5M7.70898 12.5L12.709 7.49999" stroke="#3B3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 );
 
@@ -539,7 +539,7 @@ export const Forward = ({
   ...props
 }: IconSvgProps) => (
 <svg width={size} height={size} viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.90332 6H11.9033M11.9033 6L6.90332 1M11.9033 6L6.90332 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.90332 6H11.9033M11.9033 6L6.90332 1M11.9033 6L6.90332 11" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 );
 
@@ -551,7 +551,7 @@ export const Add = ({
   ...props
 }: IconSvgProps) => (
 <svg width={size} height={size} viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clipRule="evenodd" d="M12.25 6.59546C12.25 6.18125 11.9142 5.84546 11.5 5.84546C11.0857 5.84546 10.75 6.18125 10.75 6.59546V11.2499H6.09521C5.681 11.2499 5.34521 11.5857 5.34521 11.9999C5.34521 12.4141 5.681 12.7499 6.09521 12.7499H10.75V17.4046C10.75 17.8189 11.0857 18.1546 11.5 18.1546C11.9142 18.1546 12.25 17.8189 12.25 17.4046V12.7499H16.9044C17.3186 12.7499 17.6544 12.4141 17.6544 11.9999C17.6544 11.5857 17.3186 11.2499 16.9044 11.2499H12.25V6.59546Z" fill="#3B3B3B"/>
+<path fillRule="evenodd" clipRule="evenodd" d="M12.25 6.59546C12.25 6.18125 11.9142 5.84546 11.5 5.84546C11.0857 5.84546 10.75 6.18125 10.75 6.59546V11.2499H6.09521C5.681 11.2499 5.34521 11.5857 5.34521 11.9999C5.34521 12.4141 5.681 12.7499 6.09521 12.7499H10.75V17.4046C10.75 17.8189 11.0857 18.1546 11.5 18.1546C11.9142 18.1546 12.25 17.8189 12.25 17.4046V12.7499H16.9044C17.3186 12.7499 17.6544 12.4141 17.6544 11.9999C17.6544 11.5857 17.3186 11.2499 16.9044 11.2499H12.25V6.59546Z" fill="#3B3B3B"/>
 </svg>
 );
 

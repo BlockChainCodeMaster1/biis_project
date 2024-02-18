@@ -1,5 +1,5 @@
-import React from "react";
-import {Checkbox, Link, User, Chip, cn} from "@nextui-org/react";
+import { useState } from "react";
+import { Checkbox, Input, cn } from "@nextui-org/react";
 
 export const CustomCheckbox = ({ user, value }) => {
   return (
@@ -16,9 +16,34 @@ export const CustomCheckbox = ({ user, value }) => {
       }}
       value={value}
     >
-      <div className="w-full flex justify-between gap-2">
+      <div className="w-full flex justify-between items-center">
         <div>{user.address}</div>
-        <div className="flex flex-col items-end gap-1">{user.amount}</div>
+        <Input
+          classNames={{
+            // label: "text-black/50 dark:text-white/90",
+            base: ["w-28"],
+            input: [
+              // "bg-transparent",
+              // "hover:bg-transparent",
+              "text-right",
+              // "text-sm",
+            ],
+            inputWrapper: [
+              // "shadow-none",
+              // "hover:shadow-none",
+              // "bg-transparent",
+              // "backdrop-none",
+              // "hover:bg-none",
+              // "group-data-[focus=true]:bg-transparent",
+              // "group-data-[hover=true]:bg-transparent",
+            ],
+          }}
+          size="sm"
+          type="number"
+          label=""
+          labelPlacement="outside"
+          value={user.amount}
+        />
       </div>
     </Checkbox>
   );

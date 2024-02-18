@@ -11,7 +11,7 @@ import {
   DropdownItem,
   Button,
 } from "@nextui-org/react";
-import { getBTCPrice, getTickBalance } from "@/api";
+import { getTickBalance } from "@/api";
 import { useWalletContext } from "@/context/wallet";
 import Decimal from "decimal.js";
 import { BTC, Unisat, DISCONNECT, DOT } from "@/components/icons";
@@ -29,12 +29,18 @@ const config: Object = {
   // theme: "dark",
 };
 
-export const Balance = () => {
+interface balanceProps {
+  btcPrice: number;
+  changeSendAddress: (value: string[]) => void;
+}
+
+
+export const Balance = ({ ...props }: balanceProps) => {
   const iconClasses = "text-xl text-block pointer-events-none flex-shrink-0";
   const { account, setAccount } = useWalletContext();
-  const [btcPrice, setBtcPrice] = useState(0);
   const [balance, setBalance] = useState(0);
   const [biisBalance, setBiisBalance] = useState(0);
+  const {btcPrice ,changeSendAddress} = props;
 
   const connectUnisatWallet = async () => {
     if (typeof (window as any).unisat == "undefined") {
@@ -49,6 +55,7 @@ export const Balance = () => {
         });
         const BiisBalance = await getTickBalance(accounts[0], "biis");
         setBiisBalance(BiisBalance.availableBalance);
+        changeSendAddress([accounts[0]]);
         console.log("BiisBalance", BiisBalance);
         toast("🚀 Connect success!", config);
       } catch (e) {
@@ -68,6 +75,7 @@ export const Balance = () => {
           unisat: "",
           okx: accounts["address"],
         });
+        changeSendAddress([accounts["address"]]);
         const BiisBalance = await getTickBalance(accounts["address"], "biis");
         setBiisBalance(BiisBalance.availableBalance);
         console.log("BiisBalance", BiisBalance);
@@ -91,9 +99,6 @@ export const Balance = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       const walletAccount = account.unisat != "" ? account.unisat : account.okx;
-      const btcPrice = await getBTCPrice();
-      setBtcPrice(btcPrice.USD);
-      console.log(btcPrice);
       if (walletAccount != "") {
         if (account.unisat != "") {
           const accounts = await (window as any).unisat.requestAccounts();
@@ -104,6 +109,7 @@ export const Balance = () => {
           const balance = await (window as any).unisat.getBalance();
           console.log(balance);
           setBalance(balance.total);
+          changeSendAddress([accounts[0]]);
         } else if (account.okx != "") {
           let accounts = await (window as any).okxwallet.bitcoin.connect();
           setAccount({
@@ -113,6 +119,7 @@ export const Balance = () => {
           const balance = await (window as any).okxwallet.bitcoin.getBalance();
           console.log(balance);
           setBalance(balance.total);
+          changeSendAddress([accounts["address"]]);
         }
       }
     }, 3000);

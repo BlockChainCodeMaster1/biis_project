@@ -1,49 +1,61 @@
 "use client";
-
+import { useState, useEffect } from "react";
 import { Balance } from "@/components/balance";
 import { Gas } from "@/components/gas";
 import { Blocks } from "@/components/blocks";
 import { SidebarWrapper } from "@/components/sidebar/sidebar";
-import {
-  Button,
-  Autocomplete,
-  AutocompleteItem,
-  Avatar,
-  CheckboxGroup,
-  Card,
-  CardBody,
-  Divider,
-  Progress,
-  Select,
-  SelectItem,
-  Input,
-} from "@nextui-org/react";
+import { Button, CheckboxGroup, Select, SelectItem, Input, } from "@nextui-org/react";
 import { Back, Order, Forward, SearchIcon, Add } from "@/components/icons";
 import { CustomCheckbox } from "@/components/CustomCheckbox";
-import { useState } from "react";
-import clsx from "clsx";
+import { GasModule } from "@/components/gasModule";
+import { TotalCost } from "@/components/totalCost";
+import { getBTCPrice, getTickBalance, getTickSummary } from "@/api";
+
+interface receiveAddressObj {
+  address: string;
+  amount: number;
+}
 
 export default function AppPage() {
-  const users = [
-    {
-      id: 1,
-      role: "CEO",
-      team: "Management",
-      status: "active",
-      age: "29",
-      email: "tony.reichert@example.com",
-    },
-    {
-      id: 2,
-      role: "Tech Lead",
-      team: "Development",
-      status: "paused",
-      age: "25",
-      email: "zoey.lang@example.com",
-    }
-  ];
-  const [groupSelected, setGroupSelected] = useState([]);
-  const [gasTab, setGasTab] = useState(1);
+  const [sendAddress, setSendAddress] = useState<string[]>([]);
+  const [sendAddressAmount, setSendAddressAmount] = useState(0);
+  const [receiveAddress, setReceiveAddress] = useState<string[]>([]);
+  const [receiveAddresses, setReceiveAddresses] = useState<receiveAddressObj[]>(
+    [
+      {
+        address:
+          "bc1py6vz70urujdedy9warp6djvt5lmx7l6yncfprr63fqrhjejrnapqtn4nhk",
+        amount: 1000
+      },
+    ]
+  );
+  const [tickSummary, setTickSummary] = useState([]);
+  const [gas, setGas] = useState<string>("0")
+  const [btcPrice, setBtcPrice] = useState(0);
+
+   const formatAddress = (address:string) => {
+     return (
+       address.substr(0, 8) + "......" + address.substr(address.length - 8, 8)
+     );
+   };
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const btcPrice = await getBTCPrice();
+      setBtcPrice(btcPrice.USD);
+      console.log(btcPrice);
+      console.log("sendAddress.length", sendAddress);
+      if (sendAddress.length == 1) {
+        const tickSummary = await getTickSummary(sendAddress[0]);
+        
+        console.log("tickSummary", tickSummary);
+        const { detail } = tickSummary;
+        setTickSummary(detail);
+      }
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [sendAddress]);
+
 
   return (
     <>
@@ -51,7 +63,7 @@ export default function AppPage() {
         <SidebarWrapper />
       </div>
       <div className=" w-full flex flex-row">
-        <div className=" w-9/12 m-3 mr-0 p-6 bg-white rounded-lg shadow-lg  h-full flex flex-col">
+        <div className=" w-9/12 m-3 mr-0 p-6 bg-white rounded-lg shadow-lg  flex flex-col">
           <div className=" flex justify-between items-center">
             <div className=" flex flex-row gap-2">
               <Button
@@ -84,12 +96,12 @@ export default function AppPage() {
                 radius="sm"
                 endContent={<Forward size={12} />}
               >
-                Let's do it
+                Let&apos;s do it
               </Button>
             </div>
           </div>
           <div className="flex flex-row h-full">
-            <div className="my-2 border-dashed border-1 rounded-2xl flex flex-col w-1/3">
+            <div className="my-2 border-dashed border-1 rounded-2xl flex flex-col w-2/5">
               <div className=" flex flex-row  gap-2 p-2">
                 <Input
                   type="email"
@@ -112,43 +124,51 @@ export default function AppPage() {
               <div className="flex flex-col gap-1 w-full overflow-auto h-full px-2">
                 <CheckboxGroup
                   color="warning"
-                  value={groupSelected}
-                  onChange={setGroupSelected}
+                  value={sendAddress}
+                  onValueChange={
+                    setSendAddress as (value: string[] | undefined) => void
+                  }
+                  isDisabled
                   classNames={{
                     base: "w-full",
                   }}
                 >
-                  <CustomCheckbox
-                    value="bc1q6tqs5kvjf5n5....dx0aw"
-                    user={{
-                      address: "bc1q6tqs5kvjf5n5....dx0aw",
-                      amount: "1000",
-                    }}
-                  />
+                  {sendAddress.map((el, index) => {
+                    return (
+                      <CustomCheckbox
+                        key={index}
+                        value={el}
+                        user={{
+                          address: formatAddress(el),
+                          amount: sendAddressAmount,
+                        }}
+                      />
+                    );
+                  })}
                 </CheckboxGroup>
               </div>
             </div>
-            <div className="w-1/3 flex items-center">
+            <div className=" w-1/5 flex items-center">
               <div className="flex flex-row w-full px-6 bg-[url(/app/long_arrow.svg)] bg-no-repeat bg-[length:100%_auto] bg-center">
                 <div className="w-full border-3 border-black rounded-2xl">
-                  <Select className="max-w-xs" label="Select country">
-                    <SelectItem
-                      key="argentina"
-                      startContent={
-                        <Avatar
-                          alt="Argentina"
-                          className="w-6 h-6"
-                          src="https://flagcdn.com/ar.svg"
-                        />
-                      }
-                    >
-                      BIIS - 1000323
-                    </SelectItem>
+                  <Select
+                    items={tickSummary}
+                    label="Select BRC20"
+                    className="max-w-xs"
+                  >
+                    {(tick) => (
+                      <SelectItem
+                        key={tick["ticker"]}
+                        textValue={`${tick["ticker"]} - ${tick["overallBalance"]}`}
+                      >
+                        {tick["ticker"]} - {tick["overallBalance"]}
+                      </SelectItem>
+                    )}
                   </Select>
                 </div>
               </div>
             </div>
-            <div className="my-2 border-dashed border-1 rounded-2xl flex flex-col w-1/3">
+            <div className="my-2 border-dashed border-1 rounded-2xl flex flex-col w-2/5">
               <div className=" flex flex-row  gap-2 p-2">
                 <Input
                   type="email"
@@ -171,26 +191,33 @@ export default function AppPage() {
               <div className="flex flex-col gap-1 w-full overflow-auto h-full px-2">
                 <CheckboxGroup
                   color="warning"
-                  value={groupSelected}
-                  onChange={setGroupSelected}
+                  value={receiveAddress}
+                  onValueChange={
+                    setReceiveAddress as (value: string[] | undefined) => void
+                  }
                   classNames={{
                     base: "w-full",
                   }}
                 >
-                  <CustomCheckbox
-                    value="bc1q6tqs5kvjf5n5....dx0aw"
-                    user={{
-                      address: "bc1q6tqs5kvjf5n5....dx0aw",
-                      amount: "1000",
-                    }}
-                  />
+                  {receiveAddresses.map((el, index) => {
+                    return (
+                      <CustomCheckbox
+                        key={index}
+                        value={el.address}
+                        user={{
+                          address: formatAddress(el.address),
+                          amount: el.amount,
+                        }}
+                      />
+                    );
+                  })}
                 </CheckboxGroup>
               </div>
             </div>
           </div>
           <div className=" bg-[#F5F5F7] rounded-lg p-4 flex flex-row mt-2 gap-2">
-            <div className="w-3/12 leading-[2.2em] px-4 text-sm">
-              <h1 className=" text-base">Order details</h1>
+            <div className="w-4/12 leading-[2.2em] px-4 text-sm">
+              <h1 className=" text-base font-bold">Order details</h1>
               <p className=" flex justify-between">
                 <span className=" text-[#AFAFAF]">transactional mode</span>
                 <span>-</span>
@@ -212,184 +239,16 @@ export default function AppPage() {
                 <span>-</span>
               </p>
             </div>
-            <div className="w-6/12 px-2">
-              <h1>Gas setting</h1>
-              <Card className=" my-2 rounded-lg shadow-none border-1 ">
-                <CardBody className="py-2">
-                  <div className="flex items-center text-small text-center">
-                    <div
-                      className={clsx(
-                        "w-full",
-                        "rounded-lg",
-                        " cursor-pointer",
-                        gasTab == 0 ? "bg-[#ffc037]" : "bg-none"
-                      )}
-                    >
-                      <h1
-                        className={clsx(
-                          "text-2xl",
-                          "font-bold",
-                          gasTab == 0 ? "text-white" : "text-gray-700"
-                        )}
-                      >
-                        10
-                      </h1>
-                      <div
-                        className={clsx(
-                          "text-sm",
-                          gasTab == 0 ? "text-white" : "text-gray-400"
-                        )}
-                      >
-                        Slow 🐢
-                      </div>
-                    </div>
-                    <Divider className="h-6" orientation="vertical" />
-                    <div
-                      className={clsx(
-                        "w-full",
-                        "rounded-lg",
-                        " cursor-pointer",
-                        "py-1",
-                        gasTab == 1 ? "bg-[#ffc037]" : "bg-none"
-                      )}
-                    >
-                      <h1
-                        className={clsx(
-                          "text-2xl",
-                          "font-bold",
-                          gasTab == 1 ? "text-white" : "text-gray-700"
-                        )}
-                      >
-                        10
-                      </h1>
-                      <div
-                        className={clsx(
-                          "text-sm",
-                          gasTab == 1 ? "text-white" : "text-gray-400"
-                        )}
-                      >
-                        Normal 🚗
-                      </div>
-                    </div>
-                    <Divider className="h-6" orientation="vertical" />
-                    <div
-                      className={clsx(
-                        "w-full",
-                        "rounded-lg",
-                        " cursor-pointer",
-                        "py-1",
-                        gasTab == 2 ? "bg-[#ffc037]" : "bg-none"
-                      )}
-                    >
-                      <h1
-                        className={clsx(
-                          "text-2xl",
-                          "font-bold",
-                          gasTab == 2 ? "text-white" : "text-gray-700"
-                        )}
-                      >
-                        10
-                      </h1>
-                      <div
-                        className={clsx(
-                          "text-sm",
-                          gasTab == 2 ? "text-white" : "text-gray-400"
-                        )}
-                      >
-                        Fast 🚀
-                      </div>
-                    </div>
-                    <Divider className="h-6" orientation="vertical" />
-                    <div
-                      className={clsx(
-                        "w-full",
-                        "rounded-lg",
-                        " cursor-pointer",
-                        "py-1",
-                        gasTab == 3 ? "bg-[#ffc037]" : "bg-none"
-                      )}
-                    >
-                      <h1
-                        className={clsx(
-                          "text-2xl",
-                          "font-bold",
-                          gasTab == 3 ? "text-white" : "text-gray-700"
-                        )}
-                      >
-                        10
-                      </h1>
-                      <div
-                        className={clsx(
-                          "text-sm",
-                          gasTab == 3 ? "text-white" : "text-gray-400"
-                        )}
-                      >
-                        Fast 🚀
-                      </div>
-                    </div>
-                  </div>
-                </CardBody>
-              </Card>
-              <Card className=" my-2 rounded-lg shadow-none border-1">
-                <CardBody className="py-2">
-                  <h1 className=" text-base">Estimated time</h1>
-                  <Progress
-                    size="md"
-                    radius="sm"
-                    classNames={{
-                      base: "max-w-md !flex !flex-row !flex-row-reverse whitespace-nowrap items-center  ",
-                      track: "border border-none w-full",
-                      indicator:
-                        "bg-gradient-to-r from-green-100 to-green-500  w-full",
-                      label: "tracking-wider font-medium text-default-600",
-                      value: "text-foreground/60",
-                    }}
-                    value={100}
-                    showValueLabel={true}
-                    valueLabel={
-                      <span className=" text-[#58BF6D] font-bold">10 Mins</span>
-                    }
-                  />
-                </CardBody>
-              </Card>
+            <div className="w-5/12 px-2">
+              <GasModule gas={gas} changeGas={setGas} />
             </div>
             <div className="w-3/12 text-xs">
-              <h1 className=" text-base">Total Cost</h1>
-              <div className=" w-full p-4 bg-[url('/app/bill_bg.svg')] bg-cover bg-no-repeat  bg-top">
-                <div className=" flex justify-between text-gray-800">
-                  <span className="">Sats In Inscription</span>
-                  <span className=" text-right">
-                    <h1>0 sats</h1>
-                    <p className="text-[#AFAFAF]">$0</p>
-                  </span>
-                </div>
-                <div className=" flex justify-between text-gray-800">
-                  <span className="">Network Fee</span>
-                  <span className=" text-right">
-                    <h1>0 sats</h1>
-                    <p className="text-[#AFAFAF]">$0</p>
-                  </span>
-                </div>
-                <div className=" flex justify-between text-gray-800">
-                  <span className="">Service Base Fee</span>
-                  <span className=" text-right">
-                    <h1>0 sats</h1>
-                    <p className="text-[#AFAFAF]">$0</p>
-                  </span>
-                </div>
-                <div className=" flex justify-between text-gray-800">
-                  <span className="">Total</span>
-                  <span className=" text-right">
-                    <h1>0 sats</h1>
-                    <p className="text-[#AFAFAF]">$0</p>
-                  </span>
-                </div>
-              </div>
+              <TotalCost gas={gas} btcPrice={btcPrice} />
             </div>
           </div>
         </div>
         <div className=" w-3/12 m-3 p-4 bg-white rounded-lg shadow-lg">
-          <Balance />
+          <Balance btcPrice={btcPrice} changeSendAddress={setSendAddress} />
           <Gas />
           <Blocks />
         </div>

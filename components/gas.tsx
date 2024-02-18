@@ -13,7 +13,6 @@ export const Gas = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       const feeRate = await getFeeRate();
-      console.log(feeRate)
       setFees(feeRate);
     }, 3000);
     return () => clearInterval(interval);

@@ -51,3 +51,21 @@ export const getTickBalance = async (address: String, tick: String) => {
     console.log(error);
   }
 };
+
+
+export const getTickSummary = async (address: String) => {
+  try {
+    const { data } = await axios.get(
+      `https://open-api.unisat.io/v1/indexer/address/${address}/brc20/summary`,
+      {
+          headers: {
+            "content-type": "application/json",
+             'Authorization': 'Bearer 91a92639f53107efdd998e7d79ee815137fe8b1679a02b48088f50814ebe462a'
+          },
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

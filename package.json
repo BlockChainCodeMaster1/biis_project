@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "pnpm --filter @nextui-org/storybook start",
+    "build-storybook": "pnpm --filter @nextui-org/storybook build"
   },
   "dependencies": {
     "@babel/core": "^7.23.7",
@@ -31,6 +33,7 @@
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.16",
     "axios": "^1.6.5",
+    "chromatic": "^10.9.6",
     "clsx": "^2.0.0",
     "cookie-parser": "^1.4.6",
     "decimal.js": "^10.4.3",

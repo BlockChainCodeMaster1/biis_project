@@ -195,30 +195,7 @@ export default function AppPage() {
                 >
                   <Add size={24} />
                 </Button>
-                <div className=" fixed w-[23rem] bg-white z-50 right-3 top-3 bottom-3 rounded-xl shadow-md p-6">
-                  <div className="flex text-xl font-bold leading-6 gap-4">
-                    <Button
-                      isIconOnly
-                      className=" bg-[#F5F5F5]"
-                      size="md"
-                      radius="sm"
-                    >
-                      <Close size={12} />
-                    </Button>
-                    <span>Add Wallet Address</span>
-                  </div>
-                  <Codemirror />
-                  <div>
-                    <Button
-                      isIconOnly
-                      className=" bg-[#F5F5F5]"
-                      size="md"
-                      radius="sm"
-                    >
-                      <Add size={24} />
-                    </Button>
-                  </div>
-                </div>
+
               </div>
               <div className="flex flex-col gap-1 w-full overflow-auto h-full px-2">
                 <CheckboxGroup

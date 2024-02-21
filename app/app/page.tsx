@@ -5,7 +5,15 @@ import { Gas } from "@/components/gas";
 import { Blocks } from "@/components/blocks";
 import { SidebarWrapper } from "@/components/sidebar/sidebar";
 import { Button, CheckboxGroup, Select, SelectItem, Input, } from "@nextui-org/react";
-import { Back, Order, Forward, SearchIcon, Add } from "@/components/icons";
+import {
+  Back,
+  Order,
+  Forward,
+  SearchIcon,
+  Add,
+  Close,
+} from "@/components/icons";
+import { Codemirror } from "@/components/codemirror";
 import { CustomCheckbox } from "@/components/CustomCheckbox";
 import { GasModule } from "@/components/gasModule";
 import { TotalCost } from "@/components/totalCost";
@@ -35,7 +43,7 @@ export default function AppPage() {
 
    const formatAddress = (address:string) => {
      return (
-       address.substr(0, 8) + "......" + address.substr(address.length - 8, 8)
+       address.substr(0, 16) + "......" + address.substr(address.length - 16, 16)
      );
    };
 
@@ -63,7 +71,7 @@ export default function AppPage() {
         <SidebarWrapper />
       </div>
       <div className=" w-full flex flex-row">
-        <div className=" w-9/12 m-3 mr-0 p-6 bg-white rounded-lg shadow-lg  flex flex-col">
+        <div className="w-full m-3 mr-0 p-6 bg-white rounded-lg shadow-lg  flex flex-col">
           <div className=" flex justify-between items-center">
             <div className=" flex flex-row gap-2">
               <Button
@@ -154,7 +162,7 @@ export default function AppPage() {
                   <Select
                     items={tickSummary}
                     label="Select BRC20"
-                    className="max-w-xs"
+                    className="w-full"
                   >
                     {(tick) => (
                       <SelectItem
@@ -187,6 +195,30 @@ export default function AppPage() {
                 >
                   <Add size={24} />
                 </Button>
+                <div className=" fixed w-[23rem] bg-white z-50 right-3 top-3 bottom-3 rounded-xl shadow-md p-6">
+                  <div className="flex text-xl font-bold leading-6 gap-4">
+                    <Button
+                      isIconOnly
+                      className=" bg-[#F5F5F5]"
+                      size="md"
+                      radius="sm"
+                    >
+                      <Close size={12} />
+                    </Button>
+                    <span>Add Wallet Address</span>
+                  </div>
+                  <Codemirror />
+                  <div>
+                    <Button
+                      isIconOnly
+                      className=" bg-[#F5F5F5]"
+                      size="md"
+                      radius="sm"
+                    >
+                      <Add size={24} />
+                    </Button>
+                  </div>
+                </div>
               </div>
               <div className="flex flex-col gap-1 w-full overflow-auto h-full px-2">
                 <CheckboxGroup
@@ -247,7 +279,7 @@ export default function AppPage() {
             </div>
           </div>
         </div>
-        <div className=" w-3/12 m-3 p-4 bg-white rounded-lg shadow-lg">
+        <div className="w-[30rem] m-3 p-4 bg-white rounded-lg shadow-lg">
           <Balance btcPrice={btcPrice} changeSendAddress={setSendAddress} />
           <Gas />
           <Blocks />
